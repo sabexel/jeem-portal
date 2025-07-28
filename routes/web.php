@@ -628,7 +628,11 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
     });
     Route::resource('gift_cards', GiftCardController::class);
 
+    Route::controller(CourierController::class)->group(function () {
+        Route::get('couriers/import-bills', 'import_sheet')->name('couriers.import_sheet');
+    });
     Route::resource('couriers', CourierController::class);
+
 
     Route::controller(CouponController::class)->group(function () {
         Route::get('coupons/gencode', 'generateCode');

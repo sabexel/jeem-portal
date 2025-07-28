@@ -47,4 +47,8 @@ class CourierController extends Controller
         Courier::find($id)->update(['is_active' => false]);
         return redirect()->back()->with('not_permitted', 'Courier deleted successfully');
     }
+
+    public function import_sheet() {
+        dd('import excel sheet');
+    }
 }
