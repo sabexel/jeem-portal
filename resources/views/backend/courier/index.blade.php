@@ -9,6 +9,8 @@
 <section>
     <div class="container-fluid">
         <button class="btn btn-info" data-toggle="modal" data-target="#create-modal"><i class="dripicons-plus"></i> {{trans('file.Add Courier')}}</button>
+        <button class="btn btn-info" data-toggle="modal" data-target="#import-modal"><i class="dripicons-plus"></i> Import File</button>
+
     </div>
     <div class="table-responsive">
         <table id="courier-table" class="table" style="width: 100%">
@@ -124,6 +126,44 @@
           </div>
       </div>
   </div>
+</div>
+
+<div id="import-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="exampleModalLabel" class="modal-title">Upload Remittance File</h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true"><i class="dripicons-cross"></i></span></button>
+            </div>
+            <div class="modal-body">
+              <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
+                {!! Form::open(['route' => 'couriers.import_excel', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                  <div class="row">
+                      <div class="col-md-12 form-group">
+                            <label>Select Courier *</label>
+                            {{-- <input type="text" name="name" class="form-control"> --}}
+                            <select name="name" id="" class="form-control">
+                                @foreach ($lims_courier_all as $courier)
+                                    <option value="{{ $courier->id }}">{{ $courier->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Excel Format File *</label>
+                            <input type="file" name="remittance_file" class="form-control @error('remittance_file') is-invalid @enderror">
+                            @error('remittance_file')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                  </div>
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary">{{trans('file.submit')}}</button>
+                  </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 </div>
 
 

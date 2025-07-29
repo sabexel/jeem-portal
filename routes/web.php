@@ -629,7 +629,7 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
     Route::resource('gift_cards', GiftCardController::class);
 
     Route::controller(CourierController::class)->group(function () {
-        Route::get('couriers/import-bills', 'import_sheet')->name('couriers.import_sheet');
+        Route::post('couriers/import-bills', 'process_excel')->name('couriers.import_excel');
     });
     Route::resource('couriers', CourierController::class);
 

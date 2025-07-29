@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Courier;
 
+use App\Imports\RemittanceImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class CourierController extends Controller
 {
 
@@ -48,7 +51,12 @@ class CourierController extends Controller
         return redirect()->back()->with('not_permitted', 'Courier deleted successfully');
     }
 
-    public function import_sheet() {
-        dd('import excel sheet');
+    public function process_excel(Request $request) {
+        $request->validate([
+            'remittance_file' => 'required|mimes:xlsx,csv,xls',
+        ]);
+
+        Excel::import(new RemittanceImport, $request->file('remittance_file'));
+        return redirect()->back()->with('message', 'File imported successfully');
     }
 }

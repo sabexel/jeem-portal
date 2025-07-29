@@ -95,7 +95,6 @@
                 <li id="coupon-menu"><a href="{{route('coupons.index')}}">{{trans('file.Coupon List')}}</a> </li>
                 @endif
                 <li id="courier-menu"><a href="{{route('couriers.index')}}">{{trans('file.Courier List')}}</a> </li>
-                <li><a href="{{ route('couriers.import_sheet') }}">Courier Sheets</a></li>
             </ul>
             </li>
             @endif
