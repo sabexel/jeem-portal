@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Sale;
+
 class TestController extends Controller
 {
 
     public function index()
     {
+        $raw_ref = '20250730090217'; //$row_data['ref']; // e.g. 20250204083739
+
+        $formatted_ref = 'sr-' . substr($raw_ref, 0, 8) . '-' . substr($raw_ref, 8);
+        $sale = Sale::where('reference_no', $formatted_ref)->orwhere('reference_no', $raw_ref)->first();
+        dd($sale);
         return 'hello';
     }
 

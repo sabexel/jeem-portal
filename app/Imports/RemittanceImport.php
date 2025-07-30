@@ -35,8 +35,10 @@ class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
         try {
             $row_data = $row->toArray();
 
-            $sale = Sale::where('reference_no', $row_data['ref'])->first();
-            
+            $raw_ref = $row_data['ref']; // e.g. 20250204083739
+            $formatted_ref = 'sr-' . substr($raw_ref, 0, 8) . '-' . substr($raw_ref, 8);
+            $sale = Sale::where('reference_no', $formatted_ref)->orwhere('reference_no', $raw_ref)->first();
+            // $sale = Sale::where('reference_no', $row_data['ref'])->first();
 
             if (!$sale) {
                 $this->errors[] = "Sale not found for reference: " . $row_data['ref'];

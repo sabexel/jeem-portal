@@ -68,10 +68,13 @@ use App\Http\Controllers\PackingSlipController;
 use App\Http\Controllers\ChallanController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\LabelsController;
+use App\Http\Controllers\TestController;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+Route::get('test', [TestController::class, 'index']);
 
 Route::get('migrate', function() {
 	Artisan::call('migrate');
