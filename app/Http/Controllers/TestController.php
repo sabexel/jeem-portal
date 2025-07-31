@@ -11,7 +11,7 @@ class TestController extends Controller
 
     public function index()
     {
-        $raw_ref = '20250203081508'; //$row_data['ref']; // e.g. 20250204083739
+        $raw_ref = '20250214030035'; //$row_data['ref']; // e.g. 20250204083739
 
         $formatted_ref = 'sr-' . substr($raw_ref, 0, 8) . '-' . substr($raw_ref, 8);
         dd($formatted_ref);

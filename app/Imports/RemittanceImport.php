@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
+use Carbon\Carbon;
+
 class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
 {
     public $total_read_rows = 0;
@@ -34,7 +36,6 @@ class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
 
         try {
             $row_data = $row->toArray();
-
             $raw_ref = $row_data['ref']; // e.g. 20250204083739
             $formatted_ref = 'sr-' . substr($raw_ref, 0, 8) . '-' . substr($raw_ref, 8);
             $sale = Sale::where('reference_no', $formatted_ref)->orwhere('reference_no', $raw_ref)->first();
@@ -62,7 +63,8 @@ class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
                     $this->errors[] = "Cash register not found for user in warehouse: " . $sale->warehouse_id;
                     return;
                 }
-
+                // Parse the string into a Carbon object
+                $created_at = Carbon::createFromFormat('n/j/Y h:i:s A', $row_data['pod_date']);
                 Payment::create([
                     'purchase_id'        => null,
                     'user_id'            => Auth::id(),
@@ -76,6 +78,8 @@ class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
                     'change'             => 0,
                     'paying_method'      => 'Deposite',
                     'payment_note'       => 'TFM',
+                    'created_at'         => $created_at,   
+                    'updated_at'         => now(),
                 ]);
 
                 $customer = Customer::find($sale->customer_id);
