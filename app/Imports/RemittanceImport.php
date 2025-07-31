@@ -86,6 +86,9 @@ class RemittanceImport implements OnEachRow, WithHeadingRow, WithStartRow
             }
 
             $sale->paid_amount = $row_data['cod'];
+            $sale->remittence_amount = $row_data['remitted'];
+            $sale->awb = $row_data['awb'];
+            $sale->courier_charges = $row_data['charges'];
             if ($row_data['cod'] == $sale->grand_total) {
                 $sale->payment_status = 4;
             }
