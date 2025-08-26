@@ -74,6 +74,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+//custom routes by me
+use App\Http\Controllers\Reports\InventoryAssetAccountController;
+
 Route::get('test', [TestController::class, 'index']);
 
 Route::get('migrate', function() {
@@ -724,5 +728,19 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
     Route::post('woocommerce-install', [AddonInstallController::class,'woocommerceInstall'])->name('woocommerce.install');
 
     Route::post('ecommerce-install', [AddonInstallController::class,'ecommerceInstall'])->name('ecommerce.install');
+
+    //reports custom routes
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('inventory-asset-account', [InventoryAssetAccountController::class, 'index'])
+            ->name('inventory_asset_account.index');
+
+        // JSON for the table (jQuery AJAX)
+        Route::get('inventory-asset-account/data', [InventoryAssetAccountController::class, 'data'])
+            ->name('inventory_asset_account.data');
+
+        // Excel export
+        Route::get('inventory-asset-account/export', [InventoryAssetAccountController::class, 'export'])
+            ->name('inventory_asset_account.export');
+    });
 });
 
