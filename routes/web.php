@@ -76,7 +76,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //custom routes by me
-use App\Http\Controllers\Reports\InventoryAssetAccountController;
+use App\Http\Controllers\Reports\CustomReportsController;
 
 Route::get('test', [TestController::class, 'index']);
 
@@ -731,16 +731,7 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
 
     //reports custom routes
     Route::prefix('reports')->name('reports.')->group(function () {
-        Route::get('inventory-asset-account', [InventoryAssetAccountController::class, 'index'])
-            ->name('inventory_asset_account.index');
-
-        // JSON for the table (jQuery AJAX)
-        Route::get('inventory-asset-account/data', [InventoryAssetAccountController::class, 'data'])
-            ->name('inventory_asset_account.data');
-
-        // Excel export
-        Route::get('inventory-asset-account/export', [InventoryAssetAccountController::class, 'export'])
-            ->name('inventory_asset_account.export');
+        Route::get('inventory-assets-accounts', [CustomReportsController::class, 'inventory_assets_accounts'])->name('inventory_assets_accounts');
     });
 });
 
