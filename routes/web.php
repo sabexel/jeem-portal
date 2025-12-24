@@ -70,6 +70,7 @@ use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\LabelsController;
 use App\Http\Controllers\TestController;
 
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,7 @@ use Illuminate\Support\Facades\Route;
 
 //custom routes by me
 use App\Http\Controllers\Reports\CustomReportsController;
+use App\Http\Controllers\VatSalesReportController;
 
 Route::get('test', [TestController::class, 'index']);
 
@@ -732,6 +734,7 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
     //reports custom routes
     Route::prefix('reports')->name('reports.')->group(function () {
         Route::get('inventory-assets-accounts', [CustomReportsController::class, 'inventory_assets_accounts'])->name('inventory_assets_accounts');
+        Route::get('vat-sales', [VatSalesReportController::class, 'index'])->name('vat_sales');
     });
 });
 
