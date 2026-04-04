@@ -78,7 +78,7 @@ use Illuminate\Support\Facades\Route;
 
 //custom routes by me
 use App\Http\Controllers\Reports\CustomReportsController;
-use App\Http\Controllers\VatSalesReportController;
+use App\Http\Controllers\Report\VatSalesReportController;
 
 Route::get('test', [TestController::class, 'index']);
 
@@ -735,6 +735,11 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
     Route::prefix('reports')->name('reports.')->group(function () {
         Route::get('inventory-assets-accounts', [CustomReportsController::class, 'inventory_assets_accounts'])->name('inventory_assets_accounts');
         Route::get('vat-sales', [VatSalesReportController::class, 'index'])->name('vat_sales');
+        Route::post('vat-sales/data', [VatSalesReportController::class, 'data'])->name('vat_sales.data');
+        Route::post('vat-sales/export', [VatSalesReportController::class, 'export'])->name('vat_sales.export');
+        Route::get('vat-purchase', [VatSalesReportController::class, 'purchaseIndex'])->name('vat_purchase');
+        Route::post('vat-purchase/data', [VatSalesReportController::class, 'purchaseData'])->name('vat_purchase.data');
+        Route::post('vat-purchase/export', [VatSalesReportController::class, 'purchaseExport'])->name('vat_purchase.export');
     });
 });
 

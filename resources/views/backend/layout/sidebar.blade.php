@@ -356,8 +356,12 @@
 
                 $supplier_due_report_active = $role_has_permissions_list->where('name', 'supplier-due-report')->first();
 
+                $vat_sales_report_active = $role_has_permissions_list->where('name', 'vat-sales-report')->first();
+
+                $vat_purchase_report_active = $role_has_permissions_list->where('name', 'vat-purchase-report')->first();
+
             ?>
-            @if($profit_loss_active || $best_seller_active || $warehouse_report_active || $warehouse_stock_report_active || $product_report_active || $daily_sale_active || $monthly_sale_active || $daily_purchase_active || $monthly_purchase_active || $purchase_report_active || $sale_report_active || $sale_report_chart_active || $payment_report_active || $product_expiry_report_active || $product_qty_alert_active || $dso_report_active || $user_report_active || $biller_report_active || $customer_report_active || $supplier_report_active || $due_report_active || $supplier_due_report_active)
+            @if($profit_loss_active || $best_seller_active || $warehouse_report_active || $warehouse_stock_report_active || $product_report_active || $daily_sale_active || $monthly_sale_active || $daily_purchase_active || $monthly_purchase_active || $purchase_report_active || $sale_report_active || $sale_report_chart_active || $payment_report_active || $product_expiry_report_active || $product_qty_alert_active || $dso_report_active || $user_report_active || $biller_report_active || $customer_report_active || $supplier_report_active || $due_report_active || $supplier_due_report_active || $vat_sales_report_active || $vat_purchase_report_active)
             <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-document-remove"></i><span>{{trans('file.Reports')}}</span></a>
             <ul id="report" class="collapse list-unstyled ">
                 @if($profit_loss_active)
@@ -424,6 +428,16 @@
                     <input type="hidden" name="time_period" value="weekly" />
                     <a id="sale-report-chart-link" href="">{{trans('file.Sale Report Chart')}}</a>
                     {!! Form::close() !!}
+                </li>
+                @endif
+                @if($vat_sales_report_active)
+                <li id="vat-sales-report-menu">
+                    <a href="{{ route('reports.vat_sales') }}">VAT Sales Report</a>
+                </li>
+                @endif
+                @if($vat_purchase_report_active)
+                <li id="vat-purchase-report-menu">
+                    <a href="{{ route('reports.vat_purchase') }}">VAT Purchase Report</a>
                 </li>
                 @endif
                 @if($payment_report_active)

@@ -947,6 +947,24 @@ class RoleController extends Controller
         else
             $role->revokePermissionTo('supplier-due-report');
 
+        if($request->has('vat-sales-report')){
+            $permission = Permission::firstOrCreate(['name' => 'vat-sales-report']);
+            if(!$role->hasPermissionTo('vat-sales-report')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('vat-sales-report');
+
+        if($request->has('vat-purchase-report')){
+            $permission = Permission::firstOrCreate(['name' => 'vat-purchase-report']);
+            if(!$role->hasPermissionTo('vat-purchase-report')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('vat-purchase-report');
+
         if($request->has('backup_database')){
             $permission = Permission::firstOrCreate(['name' => 'backup_database']);
             if(!$role->hasPermissionTo('backup_database')){
@@ -1258,6 +1276,8 @@ class RoleController extends Controller
         }
 
         cache()->forget('permissions');
+        cache()->forget('role_has_permissions_list'.$request['role_id']);
+        cache()->forget('role_has_permissions');
 
         return redirect('role')->with('message', 'Permission updated successfully');
     }

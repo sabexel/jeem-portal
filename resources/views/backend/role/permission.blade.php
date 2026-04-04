@@ -1157,6 +1157,30 @@
 						                </span>
 						                <span>
 						                    <div aria-checked="false" aria-disabled="false">
+								                <div class="checkbox">
+							                    	@if(in_array("vat-sales-report", $all_permission))
+							                    	<input type="checkbox" value="1" id="vat-sales-report" name="vat-sales-report" checked>
+							                    	@else
+							                    	<input type="checkbox" value="1" id="vat-sales-report" name="vat-sales-report">
+							                    	@endif
+								                    <label for="vat-sales-report" class="padding05">VAT Sales Report &nbsp;&nbsp;</label>
+								                </div>
+								            </div>
+						                </span>
+						                <span>
+						                    <div aria-checked="false" aria-disabled="false">
+								                <div class="checkbox">
+							                    	@if(in_array("vat-purchase-report", $all_permission))
+							                    	<input type="checkbox" value="1" id="vat-purchase-report" name="vat-purchase-report" checked>
+							                    	@else
+							                    	<input type="checkbox" value="1" id="vat-purchase-report" name="vat-purchase-report">
+							                    	@endif
+								                    <label for="vat-purchase-report" class="padding05">VAT Purchase Report &nbsp;&nbsp;</label>
+								                </div>
+								            </div>
+						                </span>
+						                <span>
+						                    <div aria-checked="false" aria-disabled="false">
 						                    	<div class="checkbox">
 							                    	@if(in_array("warehouse-report", $all_permission))
 							                    	<input type="checkbox" value="1" id="warehouse-report" name="warehouse-report" checked>
