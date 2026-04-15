@@ -79,6 +79,8 @@ use Illuminate\Support\Facades\Route;
 //custom routes by me
 use App\Http\Controllers\Reports\CustomReportsController;
 use App\Http\Controllers\Report\VatSalesReportController;
+use App\Http\Controllers\Report\ExpenseVatReportController;
+use App\Http\Controllers\Report\TrialBalanceReportController;
 
 Route::get('test', [TestController::class, 'index']);
 
@@ -740,6 +742,12 @@ Route::group(['middleware' => ['common', 'auth', 'active']], function() {
         Route::get('vat-purchase', [VatSalesReportController::class, 'purchaseIndex'])->name('vat_purchase');
         Route::post('vat-purchase/data', [VatSalesReportController::class, 'purchaseData'])->name('vat_purchase.data');
         Route::post('vat-purchase/export', [VatSalesReportController::class, 'purchaseExport'])->name('vat_purchase.export');
+        Route::get('expense-vat', [ExpenseVatReportController::class, 'index'])->name('expense_vat');
+        Route::post('expense-vat/data', [ExpenseVatReportController::class, 'data'])->name('expense_vat.data');
+        Route::post('expense-vat/export', [ExpenseVatReportController::class, 'export'])->name('expense_vat.export');
+        Route::get('trial-balance', [TrialBalanceReportController::class, 'index'])->name('trial_balance');
+        Route::post('trial-balance/data', [TrialBalanceReportController::class, 'data'])->name('trial_balance.data');
+        Route::post('trial-balance/export', [TrialBalanceReportController::class, 'export'])->name('trial_balance.export');
     });
 });
 

@@ -1181,6 +1181,30 @@
 						                </span>
 						                <span>
 						                    <div aria-checked="false" aria-disabled="false">
+								                <div class="checkbox">
+							                    	@if(in_array("trial-balance-report", $all_permission))
+							                    	<input type="checkbox" value="1" id="trial-balance-report" name="trial-balance-report" checked>
+							                    	@else
+							                    	<input type="checkbox" value="1" id="trial-balance-report" name="trial-balance-report">
+							                    	@endif
+								                    <label for="trial-balance-report" class="padding05">Trial Balance Report &nbsp;&nbsp;</label>
+								                </div>
+								            </div>
+						                </span>
+						                <span>
+						                    <div aria-checked="false" aria-disabled="false">
+								                <div class="checkbox">
+							                    	@if(in_array("expense-vat-report", $all_permission))
+							                    	<input type="checkbox" value="1" id="expense-vat-report" name="expense-vat-report" checked>
+							                    	@else
+							                    	<input type="checkbox" value="1" id="expense-vat-report" name="expense-vat-report">
+							                    	@endif
+								                    <label for="expense-vat-report" class="padding05">Expense VAT Report &nbsp;&nbsp;</label>
+								                </div>
+								            </div>
+						                </span>
+						                <span>
+						                    <div aria-checked="false" aria-disabled="false">
 						                    	<div class="checkbox">
 							                    	@if(in_array("warehouse-report", $all_permission))
 							                    	<input type="checkbox" value="1" id="warehouse-report" name="warehouse-report" checked>

@@ -360,8 +360,12 @@
 
                 $vat_purchase_report_active = $role_has_permissions_list->where('name', 'vat-purchase-report')->first();
 
+                $expense_vat_report_active = $role_has_permissions_list->where('name', 'expense-vat-report')->first();
+
+                $trial_balance_report_active = $role_has_permissions_list->where('name', 'trial-balance-report')->first();
+
             ?>
-            @if($profit_loss_active || $best_seller_active || $warehouse_report_active || $warehouse_stock_report_active || $product_report_active || $daily_sale_active || $monthly_sale_active || $daily_purchase_active || $monthly_purchase_active || $purchase_report_active || $sale_report_active || $sale_report_chart_active || $payment_report_active || $product_expiry_report_active || $product_qty_alert_active || $dso_report_active || $user_report_active || $biller_report_active || $customer_report_active || $supplier_report_active || $due_report_active || $supplier_due_report_active || $vat_sales_report_active || $vat_purchase_report_active)
+            @if($profit_loss_active || $best_seller_active || $warehouse_report_active || $warehouse_stock_report_active || $product_report_active || $daily_sale_active || $monthly_sale_active || $daily_purchase_active || $monthly_purchase_active || $purchase_report_active || $sale_report_active || $sale_report_chart_active || $payment_report_active || $product_expiry_report_active || $product_qty_alert_active || $dso_report_active || $user_report_active || $biller_report_active || $customer_report_active || $supplier_report_active || $due_report_active || $supplier_due_report_active || $vat_sales_report_active || $vat_purchase_report_active || $trial_balance_report_active || $expense_vat_report_active)
             <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-document-remove"></i><span>{{trans('file.Reports')}}</span></a>
             <ul id="report" class="collapse list-unstyled ">
                 @if($profit_loss_active)
@@ -438,6 +442,16 @@
                 @if($vat_purchase_report_active)
                 <li id="vat-purchase-report-menu">
                     <a href="{{ route('reports.vat_purchase') }}">VAT Purchase Report</a>
+                </li>
+                @endif
+                @if($trial_balance_report_active)
+                <li id="trial-balance-report-menu">
+                    <a href="{{ route('reports.trial_balance') }}">Trial Balance</a>
+                </li>
+                @endif
+                @if($expense_vat_report_active)
+                <li id="expense-vat-report-menu">
+                    <a href="{{ route('reports.expense_vat') }}">Expense VAT Report</a>
                 </li>
                 @endif
                 @if($payment_report_active)
