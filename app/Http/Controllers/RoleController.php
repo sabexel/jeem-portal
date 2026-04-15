@@ -965,6 +965,24 @@ class RoleController extends Controller
         else
             $role->revokePermissionTo('vat-purchase-report');
 
+        if($request->has('trial-balance-report')){
+            $permission = Permission::firstOrCreate(['name' => 'trial-balance-report']);
+            if(!$role->hasPermissionTo('trial-balance-report')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('trial-balance-report');
+
+        if($request->has('expense-vat-report')){
+            $permission = Permission::firstOrCreate(['name' => 'expense-vat-report']);
+            if(!$role->hasPermissionTo('expense-vat-report')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('expense-vat-report');
+
         if($request->has('backup_database')){
             $permission = Permission::firstOrCreate(['name' => 'backup_database']);
             if(!$role->hasPermissionTo('backup_database')){
